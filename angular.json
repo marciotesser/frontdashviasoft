@@ -28,7 +28,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/saga-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/chart.js/dist/Chart.js"
             ],
             "scripts": []
           },
@@ -123,6 +127,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "frontdashviasoft"
+    }
+  },
+  "defaultProject": "frontdashviasoft",
+  "cli": {
+    "analytics": "0bab3f2d-10a8-4d4b-8e53-697ff3ab1cb1"
+  }
 }
