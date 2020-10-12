@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { SelectItem } from 'primeng/api';
+import { Subject } from 'rxjs';
 import { DashboardService } from '../dashboard.service';
 import { DisponibilidadeServico } from '../disponibilidadeservico';
+
+import { debounceTime, filter } from 'rxjs/operators';
 
 @Component({
     selector: 'app-dash-status-atual-estado',
@@ -12,13 +16,18 @@ export class DashStatusAtualEstadoComponent implements OnInit{
     estados: SelectItem[];
     estadoSelecionado: string;
     disponibilidadeServicos: DisponibilidadeServico[]= [];
-    cols: any[];
+    cols: any[];   
 
-
-    constructor(private dashboardService: DashboardService){}
-
+    constructor(        
+        private activateRoute: ActivatedRoute
+        ){}
+        
     ngOnInit(): void {
-
+            
+        this.activateRoute.params.subscribe(params => {
+            this.disponibilidadeServicos = this.activateRoute.snapshot.data['servicosStatusAtuais'];
+        });
+        
         this.estados = [
             {label: 'AM', value: 'AM'},
             {label: 'BA', value: 'BA'},
@@ -39,10 +48,6 @@ export class DashStatusAtualEstadoComponent implements OnInit{
 
         this.estadoSelecionado = 'AM';
 
-        this.dashboardService.listaStatusAtualPorEstado(this.estadoSelecionado)
-            .subscribe(servico => {
-                this.disponibilidadeServicos.push(servico);
-            });
             
         this.cols = [
             { field: 'autorizador', header: 'Autorizador'},
@@ -55,16 +60,6 @@ export class DashStatusAtualEstadoComponent implements OnInit{
             { field: 'recepcaoEvento4', header: 'Recepção Evento 4'},
         ]; 
 
-    }
-
-    selectedItem(){
-        this.disponibilidadeServicos = [];
-        this.dashboardService.listaStatusAtualPorEstado(this.estadoSelecionado)
-            .subscribe(servico => {
-                this.disponibilidadeServicos.push(servico);
-            });
-    }
-
-    
+    }   
 
 }

@@ -19,4 +19,12 @@ export class DashboardService{
         return this.http.get<DisponibilidadeServico>(API + '/servicos/estado/' + uf);
     }
 
+    listaSatusHistoricoData(data: Date){
+        return this.http.get<DisponibilidadeServico[]>(API + '/servicos/data/' + data);
+    }
+
+    listaMaiorIndisponibilidade(){
+        return this.http.get<string[]>(API + '/indisponibilidade');
+    }
+
 }

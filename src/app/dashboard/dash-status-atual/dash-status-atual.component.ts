@@ -6,7 +6,7 @@ import { DisponibilidadeServico } from '../disponibilidadeservico';
 @Component({
     selector: 'app-dash-status-atual',
     templateUrl: './dash-status-atual.component.html',
-    styleUrls: ['./dash-status-atual.component.css']
+    styleUrls: ['./dash-status-atual.component.scss']
 })
 export class DashStatusAtualComponent implements OnInit{
 
